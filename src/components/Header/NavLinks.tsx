@@ -1,6 +1,6 @@
 "use client";
 import React, { FC } from "react";
-import { categories } from "../../../../constants";
+import { categories } from "../../../constants";
 import { usePathname } from "next/navigation";
 import NavLink from "./NavLink";
 
