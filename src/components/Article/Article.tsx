@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import React, { FC } from "react";
+import ReadMoreButton from "./ReadMoreButton";
 
 interface ArticleProps {
   article: Article;
@@ -27,7 +28,7 @@ const Article: FC<ArticleProps> = ({ article }) => {
             <p>{article.published_at}</p>
           </footer>
         </div>
-        {/* readmore */}
+        <ReadMoreButton article={article} />
       </div>
     </article>
   );
