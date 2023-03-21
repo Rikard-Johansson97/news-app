@@ -1,12 +1,71 @@
+import sortNewsByImage from "@/utils/sortNewsByImage";
+import { gql } from "graphql-request";
+import { categories } from "../../constants";
+
 export const fetchNews = async (
   category?: Category | string,
   keywords?: string,
   isDynamic?: boolean
 ) => {
-  // graphQL query
-  // fetch function with next.js 13 caching...
-  //sort function by images vs not images present
-  //return res
-};
+  const query = gql`
+    query myQuery(
+      $access_key: String!
+      $categories: String!
+      $keywords: String
+    ) {
+      myQuery(
+        access_key: $access_key
+        categories: $categories
+        countries: "gb"
+        sort: "published_desc"
+        keywords: $keywords
+      ) {
+        data {
+          author
+          category
+          country
+          description
+          image
+          language
+          published_at
+          source
+          title
+          url
+        }
+        pagination {
+          count
+          limit
+          offset
+          total
+        }
+      }
+    }
+  `;
 
-//stepzen import curl "https://aguablancaiturbide.stepzen.net/version" --header "Authentication: aguablancaiturbide::stepzen.io+1000::71ac92f8421a1d74fefcc3be45541d6d7711333300a426c89ce3c1b121339982"
+  const res = await fetch(
+    `https://aguablancaiturbide.stepzen.net/api/bailing-seastar/__graphql`,
+    {
+      method: "POST",
+      cache: isDynamic ? "no-cache" : "default",
+      next: isDynamic ? { revalidate: 0 } : { revalidate: 20 },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `APIKey ${process.env.STEPZEN_API_KEY}`,
+      },
+      body: JSON.stringify({
+        query,
+        variables: {
+          access_key: process.env.MEDIASTACK_API_KEY,
+          categories: category,
+          keywords: keywords,
+        },
+      }),
+    }
+  );
+
+  console.log("LOADING DATA FROM API COUNTRY: ", category, keywords);
+  const NewsResponse = await res.json();
+  const news = sortNewsByImage(NewsResponse.data.myQuery);
+
+  return news;
+};
