@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import Article from "@/components/Article/Article";
+import LiveTimeStamp from "@/components/Article/LiveTimeStamp";
 import React, { FC } from "react";
 
 interface pageProps {
@@ -35,7 +35,9 @@ const page: FC<pageProps> = ({ searchParams }) => {
             <h2 className='font-bold pl-4'>
               source: {article.source || "Unknown"}
             </h2>
-            <p className='pl-4'>{article.published_at}</p>
+            <p className='pl-4'>
+              <LiveTimeStamp time={article.published_at} />
+            </p>
           </div>
           <p className='pt-4'>{article.description}</p>
         </div>

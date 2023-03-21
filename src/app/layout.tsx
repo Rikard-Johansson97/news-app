@@ -1,6 +1,7 @@
-import Providers from "@/components/Providers/Providers";
+import Providers from "@/app/Providers";
 import Header from "../components/Header/Header";
-import "./globals.css";
+import "../styles/globals.css";
+import { ServerThemeProvider } from "next-themes";
 
 export const metadata = {
   title: "News App",
@@ -13,13 +14,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
-      <Providers>
-        <body className='bg-gray-100 dark:bg-zinc-900 transition-all duration-700'>
+    <html lang='en' suppressHydrationWarning>
+      <body className='bg-gray-100 dark:bg-zinc-900 transition-all duration-700'>
+        <Providers>
           <Header />
           <div className='max-w-6xl mx-auto'>{children}</div>
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }
