@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import LiveTimeStamp from "@/components/Article/LiveTimeStamp";
+import { notFound } from "next/navigation";
 import React, { FC } from "react";
 
 interface pageProps {
@@ -10,8 +11,9 @@ const page: FC<pageProps> = ({ searchParams }) => {
   if (
     (searchParams && Object.entries(searchParams).length === 0) ||
     !searchParams
-  )
-    return <div>no search params</div>;
+  ) {
+    return notFound();
+  }
 
   const article: Article = searchParams;
 
