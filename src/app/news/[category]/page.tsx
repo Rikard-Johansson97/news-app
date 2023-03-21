@@ -2,6 +2,7 @@ import NewsList from "@/components/Article/NewsList";
 import { fetchNews } from "@/lib/fetchNews";
 import React from "react";
 import { categories } from "../../../../constants";
+import response from "../../../../response.json";
 
 interface NewsCategoryProps {
   params: {
@@ -12,7 +13,9 @@ interface NewsCategoryProps {
 export default async function NewsCategory({
   params: { category },
 }: NewsCategoryProps) {
-  const news: NewsResponse = await fetchNews(category);
+  // const news: NewsResponse = await fetchNews(category);
+
+  const news = response;
 
   return (
     <div>

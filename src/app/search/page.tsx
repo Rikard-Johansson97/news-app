@@ -1,17 +1,20 @@
 import { fetchNews } from "@/lib/fetchNews";
 import { categories } from "../../../constants";
 import NewsList from "@/components/Article/NewsList";
+import response from "../../../response.json";
 
 interface pageProps {
   searchParams?: { term: string };
 }
 
 const page = async ({ searchParams }: pageProps) => {
-  const news: NewsResponse = await fetchNews(
-    "general",
-    searchParams?.term,
-    true
-  );
+  // const news: NewsResponse = await fetchNews(
+  //   "general",
+  //   searchParams?.term,
+  //   true
+  // );
+
+  const news = response;
 
   return (
     <div>
