@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 import React, { FC } from "react";
 import ReadMoreButton from "./ReadMoreButton";
 import LiveTimeStamp from "./LiveTimeStamp";
+import { formatDate } from "@/utils/formatDate";
 
 interface ArticleProps {
   article: Article;
@@ -26,9 +26,7 @@ const Article: FC<ArticleProps> = ({ article }) => {
           </section>
           <footer className='text-xs text-right ml-auto flex space-x-1 pt-5 italic text-gray-400'>
             <p>{article.source} - </p>
-            <p>
-              <LiveTimeStamp time={article.published_at} />
-            </p>
+            <p>{formatDate(article.published_at)}</p>
           </footer>
         </div>
         <ReadMoreButton article={article} />

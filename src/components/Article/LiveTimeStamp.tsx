@@ -1,14 +1,14 @@
 "use client";
 
 import React, { FC } from "react";
-import ReactTimeago from "react-timeago";
+import Timeago from "react-timeago";
 
 interface LiveTimeStampProps {
   time: string;
 }
 
 const LiveTimeStamp: FC<LiveTimeStampProps> = ({ time }) => {
-  return <ReactTimeago date={time} />;
+  return <Timeago date={time} />;
 };
 
 export default LiveTimeStamp;

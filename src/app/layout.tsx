@@ -1,7 +1,6 @@
 import Providers from "@/app/Providers";
 import Header from "../components/Header/Header";
 import "../styles/globals.css";
-import { ServerThemeProvider } from "next-themes";
 
 export const metadata = {
   title: "News App",
